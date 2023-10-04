@@ -14,8 +14,8 @@ app.use(cors());
 // init connection to db
 connectToDb();
 
-app.get('/',(req,res)=>{
-    res.send("HEllo World");
-})
+const userRoutes=require("./routes/userRoutes.js");
+
+app.use('/',userRoutes);
 
 module.exports=app;
