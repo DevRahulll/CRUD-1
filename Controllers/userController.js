@@ -8,11 +8,11 @@ exports.createUser=async(req,res)=>{
     // extract info
     try {
         const{name,email}=req.body;
-        if(!name||!email){
+        if(!name || !email){
             throw new Error("Name and email are required");
         }
         
-        const userExist=User.findOne({email})
+        const userExist=User.findOne({email});
         if(userExist){
             throw new Error("User already exist");
         }
@@ -27,9 +27,26 @@ exports.createUser=async(req,res)=>{
         })
     } catch (error) {
         console.log(error);
-        res.status(404).json({
+        res.status(402).json({
             success:false,
             message:error.message,
         })
     }
+}
+
+exports.getUsers= async(req,res)=>{
+try {
+    const users=await User.find({});
+    res.status(200).json({
+        success:true,
+        users
+    })
+    
+} catch (error) {
+    console.log(error);
+    res.status(402).json({
+        success:false,
+        message:error.message,
+})
+}
 }
